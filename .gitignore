@@ -1,6 +1,7 @@
 *.py[cod]
 db
 
+local_settings.py
 # C extensions
 *.so
 
