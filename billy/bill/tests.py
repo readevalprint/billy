@@ -7,8 +7,8 @@ import tasks
 
 
 class BillTestCase(CeleryTestCaseBase):
-    @patch('bill.tasks.add.delay')
-    def test_save_and_task_sent(self, delay):
+    @patch('bill.tasks.process_bill.delay')
+    def test_save_and_process_bill(self, delay):
         b = Bill.objects.create(name='test')
-        delay.assert_called_with(4, 4)
+        delay.assert_called_with(bill_id=b.id)
 

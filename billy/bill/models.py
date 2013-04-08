@@ -4,7 +4,7 @@ import tasks
 
 class Bill(models.Model):
     CRON_CHOICES = (
-            ('', 'Run once', ''),
+            ('', 'Run once'),
             ('0 0 1 * *', 'First of every month'),
             ('0 0 * * 0', 'Weekly'),
             )
