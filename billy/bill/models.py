@@ -4,9 +4,9 @@ import tasks
 
 class Bill(models.Model):
     CRON_CHOICES = (
-            ('Run once', ''),
-            ('1st of every month', '0 0 1 * *'),
-            ('Weekly', '0 0 * * 0'),
+            ('', 'Run once', ''),
+            ('0 0 1 * *', 'First of every month'),
+            ('0 0 * * 0', 'Weekly'),
             )
 
     name = models.CharField(max_length=30)
