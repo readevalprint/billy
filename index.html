@@ -18,7 +18,7 @@
         <a class='octothorpe' href='#section-0'>#</a>
       </div>
       <p><strong>balanced_tasks</strong> is a Django app that will allow arbitrary Balanced transations
-to be logged and executed, repeatedly if needed.</p>
+to be logged and executed, repeatedly if needed. See <a href="tasks.html">tasks.py</a>.</p>
 <h1>Usage</h1>
 <p>This assumes that you have installed django_balanced, its requirements,
 and that celery is running.</p>
@@ -573,7 +573,7 @@ extra reason parameter to add to the message.</p>
         <a class='octothorpe' href='#section-35'>#</a>
       </div>
       <p>Overrides <code>run</code> in the <code>BalancedBaseTask</code> superclass.</p>
-<p>Will be called from the celery task in <a href="/tasks.html">tasks.py</a></p>
+<p>Will be called from the celery task in <a href="tasks.html">tasks.py</a></p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></pre></div>
