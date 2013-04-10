@@ -257,7 +257,7 @@ class DebitTask(BalancedBaseTask):
         Will be called from the celery task in [tasks.py](tasks.html)
         """
         debit = self.card.debit(self.amount, self.description)
-        self.audit_feed.add_event("Task Run: $%s" % (self.amount,))
+        self.audit_feed.add_event("Task Run: $%.2f" % (int(self.amount)/100.0,))
 
     def __unicode__(self):
         return 'DebitTask: %s' % self.id
