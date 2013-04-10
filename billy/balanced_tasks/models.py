@@ -2,8 +2,6 @@ from datetime import datetime
 import uuid
 
 from django.db import models
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 from django.utils.timezone import now
 
 """
@@ -94,10 +92,9 @@ class TaskRunner(models.Model):
 
     name = models.CharField(max_length=30, blank=True)
     frequency = models.CharField(default=ONCE,
-                            blank=True,
-                            max_length=20,
-                            choices=CRON_CHOICES,
-                            )
+                                 blank=True,
+                                 max_length=20,
+                                 choices=CRON_CHOICES,)
 
     task_id = models.CharField(max_length=36, blank=True, default='')
     last_run = models.DateTimeField(blank=True, null=True, default=None)
@@ -154,8 +151,8 @@ class TaskRunner(models.Model):
         self.task_id = str(uuid.uuid4())
         self.save(force_update=True)
         tasks.process_balanced_task.apply_async((self.id,),
-                                               eta=self.next_run(),
-                                               task_id=self.task_id)
+                                                eta=self.next_run(),
+                                                task_id=self.task_id)
 
     def save(self, *args, **kwargs):
         """
@@ -176,7 +173,6 @@ class AuditFeed(models.Model):
 
     def add_event(self, message):
         AuditEvent.objects.create(message=message, feed=self)
-
 
 
 class AuditEvent(models.Model):
@@ -252,7 +248,7 @@ class DebitTask(BalancedBaseTask):
     Charge the `card` an $`amount` according to the `runner.frequency`
     """
     card = models.ForeignKey(Card)
-    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    amount = models.IntegerField(default=0, blank=True)
 
     def run(self):
         """
@@ -265,5 +261,3 @@ class DebitTask(BalancedBaseTask):
 
     def __unicode__(self):
         return 'DebitTask: %s' % self.id
-
-
