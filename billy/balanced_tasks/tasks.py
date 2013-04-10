@@ -26,6 +26,9 @@ def process_balanced_task(task_runner_id):
     task_runner.balanced_task.run()
     task_runner.last_run = now()
     task_runner.save(force_update=True)
+
+    # Pull in any new data from the DB
+    task_runner = TaskRunner.objects.get(id=task_runner_id)
     eta = task_runner.next_run()
 
     logger.info('Processed TaskRunner: {bt}'
