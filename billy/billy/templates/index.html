@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">{% load static from staticfiles %}
+  <head>
+    <meta charset="utf-8">
+    <title>Bill</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="{% static "bootstrap/js/html5shiv.js" %}"></script>
+    <![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+    <script type="text/javascript" src="https://js.balancedpayments.com/v1/balanced.js"></script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Billy</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul>
+        {% for t in tasks %}
+        <li>
+        <h3>{{ t }}</h3>
+        Description: {{ t.description }}<br>
+        Created (UTC): {{ t.created_at }}<br>
+          Frequency: {{ t.runner.get_frequency_display }}
+          <h3>AuditFeed</h3>
+        <table class="table">
+          <thead>
+            <th>message</th>
+            <th>created (utc)</th>
+          </thead>
+          {% for e in t.audit_feed.auditevent_set.all %}
+          <tr>
+            <td>{{ e.message }}</td>
+            <td>{{ e.created_at }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        </li>
+        {% endfor %}
+      </ul>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
+
