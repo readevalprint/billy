@@ -8,6 +8,13 @@ logger = logging.getLogger(__name__)
 
 @task(name='process_task', ignore_result=True)
 def process_balanced_task(task_runner_id):
+    """
+    Verifies that the `process_balanced_task.request.id` that was passed
+    when this was created is still valid.
+
+    Then runs the `run()` function on the `task_runner.balanced_task` and
+    schedules another if needed.
+    """
     from models import TaskRunner
     task_runner = TaskRunner.objects.get(id=task_runner_id)
 
@@ -27,4 +34,5 @@ def process_balanced_task(task_runner_id):
                 id=task_runner.id,
                 eta=eta))
     if eta:
+        # Run the task again.
         task_runner.start()

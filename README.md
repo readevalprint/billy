@@ -2,6 +2,12 @@
 
 Billy - The Open Source Recurring Billing System, powered by Balanced
 
+# Install
+
+$ git clone https://github.com/readevalprint/billy
+$ cd billy
+$ pip install -r ./requirements.txt
+
 ## Proposal for Billy
 
 Since Balanced is a dual-sided payments platform, `Billy` must support:
