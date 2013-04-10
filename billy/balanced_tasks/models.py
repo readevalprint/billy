@@ -8,7 +8,7 @@ from django.utils.timezone import now
 
 """
 **balanced_tasks** is a Django app that will allow arbitrary Balanced transations
-to be logged and executed, repeatedly if needed.
+to be logged and executed, repeatedly if needed. See [tasks.py](tasks.html).
 
 # Usage
 This assumes that you have installed django_balanced, its requirements,
@@ -258,7 +258,7 @@ class DebitTask(BalancedBaseTask):
         """
         Overrides `run` in the `BalancedBaseTask` superclass.
 
-        Will be called from the celery task in [tasks.py](/tasks.html)
+        Will be called from the celery task in [tasks.py](tasks.html)
         """
         debit = self.card.debit(self.amount, self.description)
         self.audit_feed.add_event("Task Run: $%s" % (self.amount,))
